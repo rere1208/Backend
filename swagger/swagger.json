@@ -101,6 +101,62 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "Mettre à jour une musique",
+        "description": "Met à jour une musique spécifique",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la musique",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Objet représentant la musique mise à jour",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewMusic"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "$ref": "#/definitions/Music"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Supprimer une musique",
+        "description": "Supprime une musique spécifique",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la musique",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -129,10 +185,6 @@
     "NewMusic": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "integer",
-          "description": "ID de la nouvelle musique"
-        },
         "title": {
           "type": "string",
           "description": "Titre de la nouvelle musique"
