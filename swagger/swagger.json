@@ -1,0 +1,151 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "API de Musique",
+    "description": "Une API pour gérer les musiques"
+  },
+  "basePath": "/api/v1",
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Racine de l'API",
+        "description": "Renvoie un message indiquant que l'API fonctionne correctement",
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/musique": {
+      "get": {
+        "summary": "Liste des musiques",
+        "description": "Renvoie la liste des musiques disponibles",
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Music"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Créer une musique",
+        "description": "Crée une nouvelle musique",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Objet représentant la nouvelle musique à créer",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewMusic"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "$ref": "#/definitions/Music"
+            }
+          }
+        }
+      }
+    },
+    "/musique/random": {
+      "get": {
+        "summary": "Musique aléatoire",
+        "description": "Renvoie une musique aléatoire",
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "$ref": "#/definitions/Music"
+            }
+          }
+        }
+      }
+    },
+    "/musique/{id}": {
+      "get": {
+        "summary": "Détails d'une musique",
+        "description": "Renvoie les détails d'une musique spécifique",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la musique",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Succès",
+            "schema": {
+              "$ref": "#/definitions/Music"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Music": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID de la musique"
+        },
+        "title": {
+          "type": "string",
+          "description": "Titre de la musique"
+        },
+        "src": {
+          "type": "string",
+          "description": "Chemin d'accès à la musique"
+        },
+        "image": {
+          "type": "string",
+          "description": "Chemin d'accès à l'image de la musique"
+        }
+      }
+    },
+    "NewMusic": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "ID de la nouvelle musique"
+        },
+        "title": {
+          "type": "string",
+          "description": "Titre de la nouvelle musique"
+        },
+        "src": {
+          "type": "string",
+          "description": "Chemin d'accès à la nouvelle musique"
+        },
+        "image": {
+          "type": "string",
+          "description": "Chemin d'accès à l'image de la nouvelle musique"
+        }
+      }
+    }
+  }
+}

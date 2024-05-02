@@ -1,15 +1,18 @@
 const data = require("./../models/data.json");
 
 const controllerMusic = {
-    find: (req, res) => {
+    find: (req,res) => {
         if(req.query.search){
             const query = req.query.search;
-            const result = data.filter(song => song.tilte.toLowCase().includes(query.toLowerCase()));
-            res.status(200).json({ result: "filter" });
-        }else{
-            res.status(200).json({ result: data });
+            const result = data.filter(song => song.title.toLowerCase().includes(query.toLowerCase()));
+            if(result.length === 0) {
+                return res.status(404).json({error: "Not found"});
+            } else {
+                return res.status(200).json({result})
+            }
+        } else {
+            res.status(200).json({result: data});
         }
-        
     },
 
 
