@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const controllerMusic = require('./../Controller/Music');
 const multer = require('multer');
+const path = require('path');
 
 // Configuration de Multer pour stocker le fichier audio avec son nom d'origine
 const storage = multer.diskStorage({
@@ -23,7 +24,6 @@ const upload = multer({ storage: storage });
 // Utilise la configuration de Multer pour la route de création de musique
 router.post('/musique', upload.fields([{ name: 'audioFile', minCount: 1 }, { name: 'imageFile', minCount: 1 }]), controllerMusic.create);
 
-
 // Route pour obtenir toutes les musiques
 router.get('/musique', controllerMusic.find);
 
@@ -38,5 +38,8 @@ router.put('/musique/:id', controllerMusic.updateByID);
 
 // Route pour supprimer une musique par ID
 router.delete('/musique/:id', controllerMusic.deleteByID);
+
+// Servir les images statiques depuis le dossier uploads/images
+router.use('/images', express.static(path.join(__dirname, '../uploads/images')));
 
 module.exports = router;
