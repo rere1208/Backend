@@ -42,4 +42,7 @@ router.delete('/musique/:id', controllerMusic.deleteByID);
 // Servir les images statiques depuis le dossier uploads/images
 router.use('/images', express.static(path.join(__dirname, '../uploads/images')));
 
+// Servir les images statiques depuis le dossier uploads/images
+router.use('/music', express.static(path.join(__dirname, '../uploads/music')));
+
 module.exports = router;
